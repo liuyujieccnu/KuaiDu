@@ -1,0 +1,27 @@
+<view class='top-bar'>
+  <view class="bar-item bar-current">
+    <view>国内</view>
+    <view class='current-border'></view>
+  </view>
+  <view class="bar-item">国际</view>
+  <view class="bar-item">财经</view>
+  <view class="bar-item">娱乐</view>
+  <view class="bar-item">军事</view>
+  <view class="bar-item">体育</view>
+  <view class="bar-item">其他</view>
+</view>
+<view class='content-wrapper'>
+  <view class='hot-wrapper'>
+    <image class='hot-bg' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
+    <view class='hot-mask'></view>
+    <view class='hot-detail'>
+      <image class='hot-img' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
+      <view class='title-mask'></view>
+      <view class='hot-title'>山东四县都想当“宋江”：谁想牵头水浒文旅，其他三地都不服</view>
+      <view class='hot-publish-detail'>
+        <view class='hot-source'>上游新闻</view>
+        <view class='hot-time'>01:56</view>
+      </view>
+    </view>
+  </view>
+</view>
