@@ -17,86 +17,37 @@
 
   <!-- 热点头图页面 -->
   <view class='hot-wrapper'>
-    <image class='hot-bg' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
+    <image class='hot-bg' src="{{hotImgAdress}}"></image>
     <view class='hot-mask'></view>
     <view class='hot-detail'>
-      <image class='hot-img' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
+      <image class='hot-img' src="{{hotImgAdress}}"></image>
       <view class='title-mask'></view>
       <view class='hot-tips'>热门</view>
-      <view class='hot-title'>山东四县都想当“宋江”：谁想牵头水浒文旅，其他三地都不服</view>
+      <view class='hot-title'>{{hotTitle}}</view>
       <view class='hot-publish-detail'>
-        <view class='hot-source'>上游新闻</view>
-        <view class='hot-time'>01:56</view>
+        <view class='hot-source'>{{hotSource}}</view>
+        <view class='hot-time'>{{hotTime}}</view>
       </view>
     </view>
   </view>
 
   <!-- 新闻列表页面 -->
   <scroll-view scroll-y class='news-scroll'>
-    <view class='news-table'>
 
+    <view class='news-table' wx:for="{{newsItem}}">
       <!-- 新闻单项 -->
       <view class='news-item'>
         <view class='item-text'>
-          <view class='item-title'>山东四县都想当“宋江”：谁想牵头水浒文旅，其他三地都不服</view>
+          <view class='item-title'>{{item.title}}</view>
           <view class='item-publish-detail'>
-            <view class='item-source'>上游新闻</view>
-            <view class='item-time'>01:56</view>
+            <view class='item-source'>{{item.source}}</view>
+            <view class='item-time'>{{item.date}}</view>
           </view>
         </view>
-        <image class='item-img' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
+        <image class='item-img' src="{{item.firstImage}}"></image>
       </view>
-      <view class='news-item'>
-        <view class='item-text'>
-          <view class='item-title'>山东四县都想当“宋江”：谁想牵头水浒文旅，其他三地都不服</view>
-          <view class='item-publish-detail'>
-            <view class='item-source'>上游新闻</view>
-            <view class='item-time'>01:56</view>
-          </view>
-        </view>
-        <image class='item-img' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
-      </view>
-      <view class='news-item'>
-        <view class='item-text'>
-          <view class='item-title'>山东四县都想当“宋江”：谁想牵头水浒文旅，其他三地都不服</view>
-          <view class='item-publish-detail'>
-            <view class='item-source'>上游新闻</view>
-            <view class='item-time'>01:56</view>
-          </view>
-        </view>
-        <image class='item-img' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
-      </view>
-      <view class='news-item'>
-        <view class='item-text'>
-          <view class='item-title'>山东四县都想当“宋江”：谁想牵头水浒文旅，其他三地都不服</view>
-          <view class='item-publish-detail'>
-            <view class='item-source'>上游新闻</view>
-            <view class='item-time'>01:56</view>
-          </view>
-        </view>
-        <image class='item-img' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
-      </view>
-      <view class='news-item'>
-        <view class='item-text'>
-          <view class='item-title'>山东四县都想当“宋江”：谁想牵头水浒文旅，其他三地都不服</view>
-          <view class='item-publish-detail'>
-            <view class='item-source'>上游新闻</view>
-            <view class='item-time'>01:56</view>
-          </view>
-        </view>
-        <image class='item-img' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
-      </view>
-      <view class='news-item'>
-        <view class='item-text'>
-          <view class='item-title'>山东四县都想当“宋江”：谁想牵头水浒文旅，其他三地都不服</view>
-          <view class='item-publish-detail'>
-            <view class='item-source'>上游新闻</view>
-            <view class='item-time'>01:56</view>
-          </view>
-        </view>
-        <image class='item-img' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
-      </view>
+
     </view>
   </scroll-view>
 
-</view>
+  </view>
