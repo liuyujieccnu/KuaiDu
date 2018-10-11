@@ -1,3 +1,4 @@
+<!-- 顶部标题栏目 -->
 <view class='top-bar'>
   <view class="bar-item bar-current">
     <view>国内</view>
@@ -10,7 +11,11 @@
   <view class="bar-item">体育</view>
   <view class="bar-item">其他</view>
 </view>
+
+<!-- 内容页面 content内容可以整体切换 -->
 <view class='content-wrapper'>
+
+  <!-- 热点头图页面 -->
   <view class='hot-wrapper'>
     <image class='hot-bg' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
     <view class='hot-mask'></view>
@@ -24,4 +29,73 @@
       </view>
     </view>
   </view>
+
+  <!-- 新闻列表页面 -->
+  <scroll-view scroll-y class='news-scroll'>
+    <view class='news-table'>
+
+      <!-- 新闻单项 -->
+      <view class='news-item'>
+        <view class='item-text'>
+          <view class='item-title'>山东四县都想当“宋江”：谁想牵头水浒文旅，其他三地都不服</view>
+          <view class='item-publish-detail'>
+            <view class='item-source'>上游新闻</view>
+            <view class='item-time'>01:56</view>
+          </view>
+        </view>
+        <image class='item-img' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
+      </view>
+      <view class='news-item'>
+        <view class='item-text'>
+          <view class='item-title'>山东四县都想当“宋江”：谁想牵头水浒文旅，其他三地都不服</view>
+          <view class='item-publish-detail'>
+            <view class='item-source'>上游新闻</view>
+            <view class='item-time'>01:56</view>
+          </view>
+        </view>
+        <image class='item-img' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
+      </view>
+      <view class='news-item'>
+        <view class='item-text'>
+          <view class='item-title'>山东四县都想当“宋江”：谁想牵头水浒文旅，其他三地都不服</view>
+          <view class='item-publish-detail'>
+            <view class='item-source'>上游新闻</view>
+            <view class='item-time'>01:56</view>
+          </view>
+        </view>
+        <image class='item-img' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
+      </view>
+      <view class='news-item'>
+        <view class='item-text'>
+          <view class='item-title'>山东四县都想当“宋江”：谁想牵头水浒文旅，其他三地都不服</view>
+          <view class='item-publish-detail'>
+            <view class='item-source'>上游新闻</view>
+            <view class='item-time'>01:56</view>
+          </view>
+        </view>
+        <image class='item-img' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
+      </view>
+      <view class='news-item'>
+        <view class='item-text'>
+          <view class='item-title'>山东四县都想当“宋江”：谁想牵头水浒文旅，其他三地都不服</view>
+          <view class='item-publish-detail'>
+            <view class='item-source'>上游新闻</view>
+            <view class='item-time'>01:56</view>
+          </view>
+        </view>
+        <image class='item-img' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
+      </view>
+      <view class='news-item'>
+        <view class='item-text'>
+          <view class='item-title'>山东四县都想当“宋江”：谁想牵头水浒文旅，其他三地都不服</view>
+          <view class='item-publish-detail'>
+            <view class='item-source'>上游新闻</view>
+            <view class='item-time'>01:56</view>
+          </view>
+        </view>
+        <image class='item-img' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
+      </view>
+    </view>
+  </scroll-view>
+
 </view>
