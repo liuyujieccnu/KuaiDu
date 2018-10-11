@@ -55,6 +55,19 @@
   z-index: -3;
 }
 
+.hot-tips{
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 30rpx;
+  line-height: 42rpx;
+  padding: 5rpx 10rpx 5rpx 15rpx;
+  border-top-right-radius: 6rpx;
+  border-bottom-left-radius: 30rpx;
+  color: white;
+  background-color: rgba(225,69,0,0.7);
+}
+
 .hot-detail {
   width: 690rpx;
   height: 345rpx;

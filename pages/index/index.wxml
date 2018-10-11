@@ -22,6 +22,7 @@
     <view class='hot-detail'>
       <image class='hot-img' src="http://inews.gtimg.com/newsapp_bt/0/3203362023/641"></image>
       <view class='title-mask'></view>
+      <view class='hot-tips'>热门</view>
       <view class='hot-title'>山东四县都想当“宋江”：谁想牵头水浒文旅，其他三地都不服</view>
       <view class='hot-publish-detail'>
         <view class='hot-source'>上游新闻</view>
