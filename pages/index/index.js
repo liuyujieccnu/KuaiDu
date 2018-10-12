@@ -1,5 +1,7 @@
 //index.js
 
+let currentNewsID;
+
 Page({
 
   /**
@@ -11,6 +13,7 @@ Page({
     hotTime: "",
     hotImgAdress: "",
     newsItem: [],
+    
   },
 
   /**
@@ -24,7 +27,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '快看·资讯',
     });
-    this.getNews();
+    this.getNews("gn");
     console.log('onload');
   },
 
@@ -81,19 +84,42 @@ Page({
    * 下拉刷新相关函数
    */
   onPullDownRefresh: function() {
+    this.getNews("gn",() => {
+      wx.stopPullDownRefresh();
+    });
+  },
+  /**
+   * 新闻选项切换函数
+   */
+  onTapSwitch: function(event) { //不能用箭头函数，否则无法setData
+    // let nowDisplay = {
+    //   gn: "hide",
+    //   gj: "hide",
+    // };
+    // let dispay = this.data.display;
+    // console.log(event.target);
+    // for (let i in dispay) {
+    //   if (i === event.target.id.split("-")[0]) {
+    //     nowDisplay[i]=""
+    //   }else
+    //     nowDisplay[i]="hide"
+    // }
 
-    wx.stopPullDownRefresh();
-
+    // this.setData({
+    //   display: nowDisplay,
+    // });
+    //console.log(this.data.display)
+    this.getNews(event.target.id.split("-")[0]);
   },
 
   /**
    * 获取新闻函数
    */
-  getNews(callback) {
+  getNews(newsType, callback) {
     wx.request({
       url: 'https://test-miniprogram.com/api/news/list',
       data: {
-        type: "gn",
+        type: newsType,
       },
       success: res => {
         //console.log(res);
@@ -112,6 +138,9 @@ Page({
           newsItem: itemRes,
         });
       },
+      complete: () => {
+        callback && callback();
+      }
     })
   }
 })
