@@ -10,9 +10,9 @@ const cnNewsType = {
   'other': '其他'
 };
 let currentNewsID = "gn";
-var touchDot = 0;//触摸时的原点
-var time = 0;//  时间记录，用于滑动时且时间小于1s则执行左右滑动
-var interval = "";// 记录/清理 时间记录
+var touchDot = 0; //触摸时的原点
+var time = 0; //  时间记录，用于滑动时且时间小于1s则执行左右滑动
+var interval = ""; // 记录/清理 时间记录
 var tmpFlag = true;
 
 
@@ -31,6 +31,8 @@ Page({
     cnItem: cnNewsType,
     current: "bar-current",
     currentNewsID: currentNewsID,
+    hotId: "",
+    newsId: ""
   },
 
   /**
@@ -45,7 +47,7 @@ Page({
       title: '快看·资讯',
     });
     this.getNews(currentNewsID);
-    console.log('onload');
+    //console.log('onload');
   },
 
   /**
@@ -126,14 +128,14 @@ Page({
   touchStart: function(e) {
     touchDot = e.touches[0].pageX; // 获取触摸时的原点
     // 使用js计时器记录时间    
-    interval = setInterval(function () {
+    interval = setInterval(function() {
       time++;
-    }, 100); 
+    }, 100);
   },
   // 触摸移动事件
   touchMove: function(e) {
     let touchMove = e.touches[0].pageX;
-    console.log("touchMove:" + touchMove + " touchDot:" + touchDot + " diff:" + (touchMove - touchDot));
+    //console.log("touchMove:" + touchMove + " touchDot:" + touchDot + " diff:" + (touchMove - touchDot));
     // 向左滑动  
     if (touchMove - touchDot <= -40 && time < 10) {
       if (tmpFlag && currentNewsID !== "other") {
@@ -163,7 +165,7 @@ Page({
   },
   // 触摸结束事件
   touchEnd: function(e) {
-    
+
     //this.getNews(currentNewsID);
     clearInterval(interval); // 清除setInterval
     time = 0;
@@ -180,12 +182,13 @@ Page({
         type: newsType,
       },
       success: res => {
-        console.log(res);
+        //console.log(res);
         let hotRes = res.data.result[0];
         let itemRes = res.data.result.slice(1);
         itemRes.forEach(item => {
           item.date = item.date.slice(11, 16);
           item.source = (item.source === "") ? "快看·资讯" : item.source;
+          item.id = item.id;
           //console.log(item);
         });
         this.setData({
@@ -194,11 +197,24 @@ Page({
           hotTime: hotRes.date.slice(11, 16),
           hotImgAdress: hotRes.firstImage,
           newsItem: itemRes,
+          hotId: hotRes.id,
+
         });
       },
       complete: () => {
         callback && callback();
       }
     })
+  },
+  /**
+   * 点击进入新闻详情
+   */
+  onTapNewsDetail:function(event) {
+    //console.log(event.target.id);
+    if(event.target.id.split('-')[0].length===13){
+      wx.navigateTo({
+        url: `/pages/newsDetail/news?id=${event.target.id.split('-')[0]}`,
+      });
+    }
   }
 })

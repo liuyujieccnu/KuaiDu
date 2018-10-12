@@ -7,36 +7,36 @@
 </view>
 
 <!-- 内容页面 content内容可以整体切换 -->
-<view class="content-wrapper " bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd">
+<view class="content-wrapper " bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" bindtap="onTapNewsDetail">
 
   <!-- 热点头图页面 -->
-  <view class='hot-wrapper'>
-    <image class='hot-bg' src="{{hotImgAdress}}"></image>
-    <view class='hot-mask'></view>
-    <view class='hot-detail'>
-      <image class='hot-img' src="{{hotImgAdress}}"></image>
-      <view class='title-mask'></view>
-      <view class='hot-tips'>热门</view>
-      <view class='hot-title'>{{hotTitle}}</view>
-      <view class='hot-publish-detail'>
-        <view class='hot-source'>{{hotSource}}</view>
-        <view class='hot-time'>{{hotTime}}</view>
+  <view class='hot-wrapper' id="{{hotId}}-wrapper">
+    <image class='hot-bg' src="{{hotImgAdress}}" id="{{hotId}}-bg"></image>
+    <view class='hot-mask' id="{{hotId}}-bgmask"></view>
+    <view class='hot-detail' id="{{hotId}}-detail">
+      <image class='hot-img' src="{{hotImgAdress}}" id="{{hotId}}-img"></image>
+      <view class='title-mask' id="{{hotId}}-mask"></view>
+      <view class='hot-tips' id="{{hotId}}-tips">热门</view>
+      <view class='hot-title' id="{{hotId}}-title">{{hotTitle}}</view>
+      <view class='hot-publish-detail' id="{{hotId}}-publishdetail">
+        <view class='hot-source' id="{{hotId}}-source">{{hotSource}}</view>
+        <view class='hot-time' id="{{hotId}}-time">{{hotTime}}</view>
       </view>
     </view>
   </view>
 
   <!-- 新闻列表页面 -->
-  <view class='news-table' wx:for="{{newsItem}}" id="news-{{index}}">
+  <view class='news-table' wx:for="{{newsItem}}" id="{{item.id}}-table" >
     <!-- 新闻单项 -->
-    <view class='news-item'>
-      <view class='item-text'>
-        <view class='item-title'>{{item.title}}</view>
-        <view class='item-publish-detail'>
-          <view class='item-source'>{{item.source}}</view>
-          <view class='item-time'>{{item.date}}</view>
+    <view class='news-item' id="{{item.id}}-item">
+      <view class='item-text' id="{{item.id}}-text">
+        <view class='item-title' id="{{item.id}}-title">{{item.title}}</view>
+        <view class='item-publish-detail' id="{{item.id}}-publishdetail">
+          <view class='item-source' id="{{item.id}}-source">{{item.source}}</view>
+          <view class='item-time' id="{{item.id}}-time">{{item.date}}</view>
         </view>
       </view>
-      <image class='item-img' src="{{item.firstImage}}"></image>
+      <image class='item-img' src="{{item.firstImage}}" id="{{item.id}}-img"></image>
     </view>
 
   </view>

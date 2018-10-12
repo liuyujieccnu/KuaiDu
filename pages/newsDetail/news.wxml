@@ -1,0 +1,20 @@
+<!--pages/newsDetail/news.wxml-->
+<view class='blue-bar'></view>
+<view class='content'>
+  <view class='title'>{{title}}</view>
+  <view class='detail'>
+    
+    
+    <view class='read'>阅读量:{{read}}</view>
+    <view class='time'>{{time}}</view>
+    <view class='source'>{{source}}</view>
+    
+  </view>
+  <view class='news'>
+    <view class="{{item.type}}" id="item.id" wx:for="{{newsItem}}">
+      <view class="news-text" wx:if="{{item.type==='p'}}">{{item.text}}</view>
+      <image class="news-img" wx:if="{{item.type==='image'}}" src="{{item.src}}"></image>
+      <view class="news-strong" wx:if="{{item.type==='strong'}}">{{item.text}}</view>
+    </view>
+  </view>
+</view>

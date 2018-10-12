@@ -1,0 +1,60 @@
+/* pages/newsDetail/news.wxss */
+.blue-bar{
+  height: 2rpx;
+  background-color: #2b88d7;
+}
+
+.content{
+  margin-top: 30rpx;
+}
+
+.title{
+  padding: 0 30rpx;
+  font-size: 45rpx;
+  line-height: 60rpx;
+}
+
+.detail{
+  font-size: 25rpx;
+  margin-top: 15rpx;
+  padding-left: 30rpx;
+  opacity: 0.8;
+  width: 100%;
+}
+
+.source{
+  float: left;
+}
+
+.time{
+  display: inline;
+  padding-left: 30rpx;
+}
+
+.read{
+  float: right;
+  padding-right: 60rpx;
+}
+
+.news{
+  margin-top: 40rpx;
+  padding: 0 30rpx;
+  font-size: 35rpx;
+  line-height: 49rpx;
+  
+}
+
+.news-text{
+  text-indent: 2em;
+  padding-bottom: 10rpx;
+}
+
+.news-img{
+  width: 100%;
+}
+
+.news-strong{
+  font-weight: bold;
+  text-indent: 2em;
+  padding-bottom: 10rpx;
+}
