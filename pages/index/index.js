@@ -124,7 +124,9 @@ Page({
     }
   },
 
-  // 触摸开始事件
+  /**
+   * 触摸开始事件
+   */
   touchStart: function(e) {
     touchDot = e.touches[0].pageX; // 获取触摸时的原点
     // 使用js计时器记录时间    
@@ -132,7 +134,10 @@ Page({
       time++;
     }, 100);
   },
-  // 触摸移动事件
+
+  /**
+   * 触摸移动事件
+   */
   touchMove: function(e) {
     let touchMove = e.touches[0].pageX;
     //console.log("touchMove:" + touchMove + " touchDot:" + touchDot + " diff:" + (touchMove - touchDot));
@@ -163,7 +168,10 @@ Page({
       }
     }
   },
-  // 触摸结束事件
+
+  /**
+   * 触摸结束事件
+   */
   touchEnd: function(e) {
 
     //this.getNews(currentNewsID);
