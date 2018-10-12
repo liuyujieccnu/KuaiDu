@@ -9,7 +9,12 @@ const cnNewsType = {
   'ty': '体育',
   'other': '其他'
 };
-let currentNewsID="gn";
+let currentNewsID = "gn";
+var touchDot = 0;//触摸时的原点
+var time = 0;//  时间记录，用于滑动时且时间小于1s则执行左右滑动
+var interval = "";// 记录/清理 时间记录
+var tmpFlag = true;
+
 
 Page({
 
@@ -25,7 +30,7 @@ Page({
     tabItem: newsType,
     cnItem: cnNewsType,
     current: "bar-current",
-    currentNewsID:"gn"
+    currentNewsID: currentNewsID,
   },
 
   /**
@@ -115,6 +120,54 @@ Page({
       });
       this.getNews(event.target.id.split("-")[0]);
     }
+  },
+
+  // 触摸开始事件
+  touchStart: function(e) {
+    touchDot = e.touches[0].pageX; // 获取触摸时的原点
+    // 使用js计时器记录时间    
+    interval = setInterval(function () {
+      time++;
+    }, 100); 
+  },
+  // 触摸移动事件
+  touchMove: function(e) {
+    let touchMove = e.touches[0].pageX;
+    console.log("touchMove:" + touchMove + " touchDot:" + touchDot + " diff:" + (touchMove - touchDot));
+    // 向左滑动  
+    if (touchMove - touchDot <= -40 && time < 10) {
+      if (tmpFlag && currentNewsID !== "other") {
+        tmpFlag = false;
+        if (currentNewsID !== "other") {
+          currentNewsID = newsType[newsType.indexOf(currentNewsID) + 1];
+        }
+        this.setData({
+          currentNewsID: currentNewsID,
+        });
+        this.getNews(currentNewsID);
+      }
+    }
+    // 向右滑动
+    if (touchMove - touchDot >= 40 && time < 10) {
+      if (tmpFlag && currentNewsID !== "gn") {
+        tmpFlag = false;
+        if (currentNewsID !== "gn") {
+          currentNewsID = newsType[newsType.indexOf(currentNewsID) - 1];
+        }
+        this.setData({
+          currentNewsID: currentNewsID,
+        });
+        this.getNews(currentNewsID);
+      }
+    }
+  },
+  // 触摸结束事件
+  touchEnd: function(e) {
+    
+    //this.getNews(currentNewsID);
+    clearInterval(interval); // 清除setInterval
+    time = 0;
+    tmpFlag = true; // 回复滑动事件
   },
 
   /**

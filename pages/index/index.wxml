@@ -7,7 +7,8 @@
 </view>
 
 <!-- 内容页面 content内容可以整体切换 -->
-<view class="content-wrapper ">
+<view class="content-wrapper " bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd">
+
   <!-- 热点头图页面 -->
   <view class='hot-wrapper'>
     <image class='hot-bg' src="{{hotImgAdress}}"></image>
@@ -24,7 +25,6 @@
     </view>
   </view>
 
-
   <!-- 新闻列表页面 -->
   <view class='news-table' wx:for="{{newsItem}}" id="news-{{index}}">
     <!-- 新闻单项 -->
@@ -40,6 +40,5 @@
     </view>
 
   </view>
-
 
 </view>
