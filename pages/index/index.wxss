@@ -1,6 +1,6 @@
 .top-bar {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   padding: 20rpx 0rpx 15rpx 0rpx;
   background-color: #2b88d7;
   position: fixed;
@@ -19,6 +19,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.bar-text{
+  margin: 0 19rpx;
 }
 
 /*选中状态的文字效果*/

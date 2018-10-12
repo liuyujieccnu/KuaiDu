@@ -1,22 +1,13 @@
 <!-- 顶部标题栏目 -->
 <view class='top-bar' bindtap="onTapSwitch" id="top-bar">
-  <view class="bar-item bar-current" id="gn-tab">
-    <view id="gn-tab">国内</view>
-    <view class='current-border'></view>
+  <view class="bar-item {{currentNewsID===item?'bar-current':''}}"  wx:for="{{tabItem}}">
+    <view class='bar-text' id="{{item}}-tab">{{cnItem[item]}}</view>
+    <view class='current-border' wx:if="{{currentNewsID===item}}"></view>
   </view>
-  <view class="bar-item" id='gj-tab'>国际
-  </view>
-  <view class="bar-item" id="cj-tab">财经</view>
-  <view class="bar-item" id="yl-tab">娱乐</view>
-  <view class="bar-item" id="js-tab">军事</view>
-  <view class="bar-item" id="ty-tab">体育</view>
-  <view class="bar-item" id="qt-tab">其他</view>
 </view>
 
 <!-- 内容页面 content内容可以整体切换 -->
 <view class="content-wrapper ">
-
-
   <!-- 热点头图页面 -->
   <view class='hot-wrapper'>
     <image class='hot-bg' src="{{hotImgAdress}}"></image>

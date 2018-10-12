@@ -1,6 +1,15 @@
 //index.js
-
-let currentNewsID;
+const newsType = ['gn', 'gj', 'cj', 'yl', 'js', 'ty', 'other'];
+const cnNewsType = {
+  'gn': '国内',
+  'gj': '国际',
+  'cj': '财经',
+  'yl': '娱乐',
+  'js': '军事',
+  'ty': '体育',
+  'other': '其他'
+};
+let currentNewsID="gn";
 
 Page({
 
@@ -13,7 +22,10 @@ Page({
     hotTime: "",
     hotImgAdress: "",
     newsItem: [],
-    
+    tabItem: newsType,
+    cnItem: cnNewsType,
+    current: "bar-current",
+    currentNewsID:"gn"
   },
 
   /**
@@ -27,7 +39,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '快看·资讯',
     });
-    this.getNews("gn");
+    this.getNews(currentNewsID);
     console.log('onload');
   },
 
@@ -84,32 +96,25 @@ Page({
    * 下拉刷新相关函数
    */
   onPullDownRefresh: function() {
-    this.getNews("gn",() => {
+    this.getNews(currentNewsID, () => {
       wx.stopPullDownRefresh();
     });
   },
+
   /**
    * 新闻选项切换函数
    */
   onTapSwitch: function(event) { //不能用箭头函数，否则无法setData
-    // let nowDisplay = {
-    //   gn: "hide",
-    //   gj: "hide",
-    // };
-    // let dispay = this.data.display;
-    // console.log(event.target);
-    // for (let i in dispay) {
-    //   if (i === event.target.id.split("-")[0]) {
-    //     nowDisplay[i]=""
-    //   }else
-    //     nowDisplay[i]="hide"
-    // }
-
-    // this.setData({
-    //   display: nowDisplay,
-    // });
-    //console.log(this.data.display)
-    this.getNews(event.target.id.split("-")[0]);
+    //直接刷新数据即可
+    //console.log(event.target.id.split("-")[0]);
+    //console.log(newsType.indexOf(event.target.id.split("-")[0]));
+    if (newsType.indexOf(event.target.id.split("-")[0]) !== -1) {
+      currentNewsID = event.target.id.split("-")[0];
+      this.setData({
+        currentNewsID: currentNewsID,
+      });
+      this.getNews(event.target.id.split("-")[0]);
+    }
   },
 
   /**
@@ -122,7 +127,7 @@ Page({
         type: newsType,
       },
       success: res => {
-        //console.log(res);
+        console.log(res);
         let hotRes = res.data.result[0];
         let itemRes = res.data.result.slice(1);
         itemRes.forEach(item => {
@@ -132,7 +137,7 @@ Page({
         });
         this.setData({
           hotTitle: hotRes.title,
-          hotSource: hotRes.source === "" ? "快看·资讯" : result[0].source,
+          hotSource: hotRes.source === "" ? "快看·资讯" : hotRes.source,
           hotTime: hotRes.date.slice(11, 16),
           hotImgAdress: hotRes.firstImage,
           newsItem: itemRes,
