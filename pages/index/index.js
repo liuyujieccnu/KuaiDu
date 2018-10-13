@@ -55,6 +55,7 @@ Page({
       title: '快看·资讯',
     });
     this.getNews(currentNewsID);
+    //this.checkAndLoadNews(currentNewsID);
     //console.log('onload');
   },
   /**
@@ -150,9 +151,9 @@ Page({
         type: newsType,
       },
       success: res => {
-        //console.log(res);
+        console.log(res);
+        newsBuffer[newsType] = res;
         this.loadNews(res);
-        newsBuffer[newsType]=res;
         //console.log(newsBuffer);
       },
       fail: err => {
@@ -184,6 +185,7 @@ Page({
     console.log(newsType);
     console.log(newsBuffer[newsType]);
     if(newsBuffer[newsType]!==""){
+      console.log(newsBuffer[newsType])
       this.loadNews(newsBuffer[newsType]);
     }else{
       this.getNews(newsType);
@@ -194,13 +196,14 @@ Page({
    */
   loadNews(res){
     let hotRes = res.data.result[0];
-    let itemRes = res.data.result.slice(1);
-    itemRes.forEach(item => {
-      item.date = `${item.date.slice(5,10)} ${item.date.slice(11, 16)}`;
-      item.source = (item.source === "") ? "快看·资讯" : item.source;
-      item.id = item.id;
-      item.firstImage = item.firstImage === "" ? "../../images/kuaikan.png" : item.firstImage;
-      //console.log(item);
+    let itemRes = res.data.result.slice(1).map(item => {
+      return {
+        id:item.id,
+        title:item.title,
+        date: item.date.slice(5, 10) + " " + item.date.slice(11, 16),
+        source : (item.source === "") ? "快看·资讯" : item.source,
+        firstImage : item.firstImage === "" ? "../../images/kuaikan.png" : item.firstImage,
+      }
     });
     this.setData({
       hotTitle: hotRes.title,
