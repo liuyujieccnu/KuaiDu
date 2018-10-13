@@ -1,6 +1,11 @@
 /* pages/newsDetail/news.wxss */
+
+page{
+  overflow-x:hidden;
+}
+
 .blue-bar{
-  height: 2rpx;
+  height: 3rpx;
   background-color: #2b88d7;
 }
 

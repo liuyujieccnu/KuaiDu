@@ -13,7 +13,6 @@ Page({
     read: "",
     newItem: []
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -27,56 +26,6 @@ Page({
     });
     this.getNewsDeatail(this.data.newId);
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  },
-
   /**
    * 获取新闻详情
    */
@@ -93,23 +42,19 @@ Page({
         this.setData({
           title: result.title,
           source: result.source === "" ? "快看·资讯" : result.source,
-          time: result.date.slice(11, 16),
+          time: `${result.date.slice(5, 10)} ${result.date.slice(11, 16)}`,
           read: result.readCount,
           newsItem: result.content,
         });
       },
+      fail: err => {
+        wx.showToast({
+          title: '网络请求失败',
+        });
+      },
       complete: () => {
-        callback && callback();
+        typeof callback === 'function' && callback();
       }
     })
-  },
-
-  /**
-   * 下拉刷新相关函数
-   */
-  onPullDownRefresh: function () {
-    this.getNewsDeatail(this.data.newId, () => {
-      wx.stopPullDownRefresh();
-    });
   },
 })

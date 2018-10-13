@@ -9,6 +9,15 @@ const cnNewsType = {
   'ty': '体育',
   'other': '其他'
 };
+let newsBuffer={
+  'gn': '',
+  'gj': '',
+  'cj': '',
+  'yl': '',
+  'js': '',
+  'ty': '',
+  'other': ''
+}
 let currentNewsID = "gn";
 var touchDot = 0; //触摸时的原点
 var time = 0; //  时间记录，用于滑动时且时间小于1s则执行左右滑动
@@ -17,7 +26,6 @@ var tmpFlag = true;
 
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -49,56 +57,6 @@ Page({
     this.getNews(currentNewsID);
     //console.log('onload');
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  },
-
   /**
    * 下拉刷新相关函数
    */
@@ -120,7 +78,8 @@ Page({
       this.setData({
         currentNewsID: currentNewsID,
       });
-      this.getNews(event.target.id.split("-")[0]);
+      //this.getNews(event.target.id.split("-")[0]);
+      this.checkAndLoadNews(event.target.id.split("-")[0]);
     }
   },
 
@@ -151,7 +110,7 @@ Page({
         this.setData({
           currentNewsID: currentNewsID,
         });
-        this.getNews(currentNewsID);
+        this.checkAndLoadNews(currentNewsID);
       }
     }
     // 向右滑动
@@ -164,7 +123,7 @@ Page({
         this.setData({
           currentNewsID: currentNewsID,
         });
-        this.getNews(currentNewsID);
+        this.checkAndLoadNews(currentNewsID);
       }
     }
   },
@@ -181,9 +140,10 @@ Page({
   },
 
   /**
-   * 获取新闻函数
+   * 网络获取新闻函数
    */
   getNews(newsType, callback) {
+    console.log('网络获取数据');
     wx.request({
       url: 'https://test-miniprogram.com/api/news/list',
       data: {
@@ -191,26 +151,17 @@ Page({
       },
       success: res => {
         //console.log(res);
-        let hotRes = res.data.result[0];
-        let itemRes = res.data.result.slice(1);
-        itemRes.forEach(item => {
-          item.date = item.date.slice(11, 16);
-          item.source = (item.source === "") ? "快看·资讯" : item.source;
-          item.id = item.id;
-          //console.log(item);
-        });
-        this.setData({
-          hotTitle: hotRes.title,
-          hotSource: hotRes.source === "" ? "快看·资讯" : hotRes.source,
-          hotTime: hotRes.date.slice(11, 16),
-          hotImgAdress: hotRes.firstImage,
-          newsItem: itemRes,
-          hotId: hotRes.id,
-
+        this.loadNews(res);
+        newsBuffer[newsType]=res;
+        //console.log(newsBuffer);
+      },
+      fail: err => {
+        wx.showToast({
+          title: '网络请求失败',
         });
       },
       complete: () => {
-        callback && callback();
+        typeof callback === 'function' && callback();
       }
     })
   },
@@ -224,5 +175,40 @@ Page({
         url: `/pages/newsDetail/news?id=${event.target.id.split('-')[0]}`,
       });
     }
+  },
+  /**
+   * 检查新闻是否已获取并展示
+   * 如果已经获取便直接展示，未获取则获取之后展示
+   */
+  checkAndLoadNews(newsType){
+    console.log(newsType);
+    console.log(newsBuffer[newsType]);
+    if(newsBuffer[newsType]!==""){
+      this.loadNews(newsBuffer[newsType]);
+    }else{
+      this.getNews(newsType);
+    }
+  },
+  /**
+   * 加载展示新闻
+   */
+  loadNews(res){
+    let hotRes = res.data.result[0];
+    let itemRes = res.data.result.slice(1);
+    itemRes.forEach(item => {
+      item.date = `${item.date.slice(5,10)} ${item.date.slice(11, 16)}`;
+      item.source = (item.source === "") ? "快看·资讯" : item.source;
+      item.id = item.id;
+      item.firstImage = item.firstImage === "" ? "../../images/kuaikan.png" : item.firstImage;
+      //console.log(item);
+    });
+    this.setData({
+      hotTitle: hotRes.title,
+      hotSource: hotRes.source === "" ? "快看·资讯" : hotRes.source,
+      hotTime: `${hotRes.date.slice(5, 10)} ${hotRes.date.slice(11, 16)}`,
+      hotImgAdress: hotRes.firstImage === "" ? "../../images/kuaikan.png" : hotRes.firstImage,
+      newsItem: itemRes,
+      hotId: hotRes.id,
+    });
   }
 })
